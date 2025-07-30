@@ -1,11 +1,18 @@
 import json
-import os
 import time
 from google import genai
 from pydantic import BaseModel, Field, AnyUrl
 from typing import List, Optional
 
-client = genai.Client()
+# Import the environment loader utility
+from env_loader import load_env_from_base, get_env_var
+
+# Load environment variables from .env file
+load_env_from_base()
+
+# Create Gemini client with API key
+api_key = get_env_var("GEMINI_API_KEY", required=True)
+client = genai.Client(api_key=api_key)
 
 
 class Shot(BaseModel):

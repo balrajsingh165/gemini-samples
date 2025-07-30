@@ -16,13 +16,20 @@ Then, run the script from your terminal:
     python examples/veo3-generate-viral-vlogs.py
 """
 
-import os
 import time
 from google import genai
 from pydantic import BaseModel
 from moviepy import VideoFileClip, concatenate_videoclips
 
-client = genai.Client()
+# Import the environment loader utility
+from env_loader import load_env_from_base, get_env_var
+
+# Load environment variables from .env file
+load_env_from_base()
+
+# Create Gemini client with API key
+api_key = get_env_var("GEMINI_API_KEY", required=True)
+client = genai.Client(api_key=api_key)
 
 
 class Scene(BaseModel):

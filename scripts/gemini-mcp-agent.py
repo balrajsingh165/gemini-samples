@@ -2,10 +2,15 @@ import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.prebuilt import create_react_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
-import os
+
+# Import the environment loader utility
+from env_loader import load_env_from_base, get_env_var
+
+# Load environment variables from .env file
+load_env_from_base()
 
 # Get the Gemini API key from the environment variable
-api_key = os.environ.get("GEMINI_API_KEY")
+api_key = get_env_var("GEMINI_API_KEY", required=True)
 
 # Create Gemini instance LLM class
 model = ChatGoogleGenerativeAI(

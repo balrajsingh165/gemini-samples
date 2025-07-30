@@ -1,12 +1,17 @@
 # pip install google-genai fastmcp
 # requires Python 3.13+
-import os
 import asyncio
 import logging
 from datetime import datetime
 from google import genai
 from uuid import uuid4
 from fastmcp import Client
+
+# Import the environment loader utility
+from env_loader import load_env_from_base, get_env_var
+
+# Load environment variables from .env file
+load_env_from_base()
 
 # Suppress all logging
 logging.getLogger().setLevel(logging.CRITICAL)
@@ -44,7 +49,7 @@ mcp_client = Client(
                     # note if you don't have Pipedream Developer credentials, you can use a temporary, short-lived token for development
                     # this will create a ephemeral account for you, which will be deleted after a short time.
                     # refer to Pipedream docs for more information: https://pipedream.com/docs/connect/mcp/developers
-                    "Authorization": f"Bearer {os.environ.get('PIPEDREAM_API_KEY',f'devtok_{uuid4()}')}",
+                    "Authorization": f"Bearer {get_env_var('PIPEDREAM_API_KEY', f'devtok_{uuid4()}')}",
                     # see here for available apps: https://pipedream.com/docs/connect/mcp/app-discovery
                     "x-pd-app-slug": "gmail, google_calendar",
                 },

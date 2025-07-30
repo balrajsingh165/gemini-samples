@@ -1,8 +1,15 @@
-import os
 import re
 from google import genai
 
-client = genai.Client()
+# Import the environment loader utility
+from env_loader import load_env_from_base, get_env_var
+
+# Load environment variables from .env file
+load_env_from_base()
+
+# Create Gemini client with API key
+api_key = get_env_var("GEMINI_API_KEY", required=True)
+client = genai.Client(api_key=api_key)
 
 
 def generate_json_from_idea(idea: str) -> str:

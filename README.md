@@ -49,6 +49,8 @@ This repository contains personal tiny samples, snippets and guides showcasing c
 - [Gemini Veo3 Optimized Prompt](scripts/gemini-veo-meta.py) - A script using Gemini 2.5 to optimize prompts for Gemini Veo3.
 - [Gemini Veo3 Vlogs](scripts/veo3-generate-viral-vlogs.py) - Automatic video generation with Gemini Veo3 combined multiple video clips.
 - [Gemini Image Meta](scripts/gemini-image-meta.py) - Generate images with Gemini and Imagen.
+- [Get Pipedream Token](scripts/get-pipedream-token.py) - Fetch OAuth access tokens for Pipedream MCP examples.
+- [Environment Loader Test](scripts/test_env_loading.py) - Test script to verify environment variables are loaded correctly.
 
 ### JavaScript Examples
 
@@ -68,14 +70,65 @@ This repository contains personal tiny samples, snippets and guides showcasing c
     ```
 
 2. **Set up environment variables:**
-   Create a `.env` file in the root directory:
+   Copy the sample environment file and configure your API keys:
+   ```bash
+   cp env.sample .env
    ```
-   GEMINI_API_KEY=your_api_key_here
-   ```
+   
+       Edit `.env` and add your API keys:
+    - **GEMINI_API_KEY** (Required): Get from [Google AI Studio](https://aistudio.google.com/app/apikey)
+    - **GOOGLE_API_KEY** (Required): Same as GEMINI_API_KEY, used in some LangChain examples
+    - **PIPEDREAM_CLIENT_ID** (Optional): Get from [Pipedream API settings](https://pipedream.com/docs/rest-api/auth) for MCP examples
+    - **PIPEDREAM_CLIENT_SECRET** (Optional): Get from [Pipedream API settings](https://pipedream.com/docs/rest-api/auth) for MCP examples
+    - **PIPEDREAM_WORKSPACE_ID** (Optional): Your Pipedream workspace ID for reference
+
+   **Note:** Never commit your actual `.env` file to version control!
 
 3. **Explore the examples:** Browse the sample notebooks to find code related to different DeepMind models and experiments.
 
 4. **Run and modify:** Experiment with the code, tweak parameters, and integrate the snippets into your own projects.
+
+### API Key Usage Details
+
+- **GEMINI_API_KEY**: Primary API key used throughout the project
+  - Required for all Python examples in `/examples/`
+  - Required for all guides in `/guides/`
+  - Required for all scripts in `/scripts/`
+  - Required for JavaScript examples in `/javascript-examples/`
+
+- **GOOGLE_API_KEY**: Alternative name for the same Gemini API key
+  - Used in some LangChain examples
+  - Typically set to the same value as GEMINI_API_KEY
+
+- **PIPEDREAM_CLIENT_ID, PIPEDREAM_CLIENT_SECRET, PIPEDREAM_WORKSPACE_ID**: Optional OAuth credentials for MCP (Model Context Protocol) examples
+  - Used in `scripts/gemini-mcp-pipedream.py`
+  - Use `scripts/get-pipedream-token.py` to fetch access tokens
+  - Access tokens expire after 1 hour and need to be refreshed
+
+**Important Notes:**
+- Google Search integration is built into Gemini 2.0 Flash and doesn't require additional API keys
+- For JavaScript examples, run with: `GEMINI_API_KEY=your_key npm run start`
+- All Python examples automatically load environment variables from `.env`
+
+### Pipedream OAuth Token Management
+
+For Pipedream MCP examples, you'll need to use OAuth credentials instead of a simple API key:
+
+1. **Set up OAuth credentials** in your `.env` file:
+   ```
+   PIPEDREAM_CLIENT_ID=your_client_id
+   PIPEDREAM_CLIENT_SECRET=your_client_secret
+   PIPEDREAM_WORKSPACE_ID=your_workspace_id
+   ```
+
+2. **Fetch access token** using the provided script:
+   ```bash
+   python scripts/get-pipedream-token.py
+   ```
+
+3. **Use the token** in your MCP examples (the script will show you how)
+
+**Note:** Pipedream access tokens expire after 1 hour and need to be refreshed using the script.
 
 ## Contributing
 

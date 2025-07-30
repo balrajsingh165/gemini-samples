@@ -1,0 +1,50 @@
+# Core Google AI dependencies
+google-genai>=1.0.0
+
+# LangChain and LangGraph ecosystem
+langchain-google-genai
+langchain
+langgraph
+langchain-mcp-adapters
+
+# MCP (Model Context Protocol) dependencies
+mcp
+fastmcp
+
+# Data analysis and manipulation
+pandas
+numpy
+scikit-learn
+
+# Web and API frameworks
+fastapi==0.115.12
+uvicorn==0.34.2
+requests
+geopy
+
+# Image and media processing
+pillow
+soundfile
+moviepy
+
+# Template engines
+jinja2
+
+# AI/ML frameworks
+openai
+crewai[tools]
+pydantic-ai
+mem0ai
+
+# Development and utility tools
+gitingest
+
+# Browser automation
+browser_use
+
+# Pydantic for data validation
+pydantic
+
+# Standard library dependencies (usually included with Python)
+# asyncio, os, json, time, datetime, pathlib, argparse, logging, re, uuid, typing
+# These are part of Python's standard library and don't need to be installed 

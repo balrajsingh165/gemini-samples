@@ -107,10 +107,13 @@ async def main():
     )
     args = parser.parse_args()
 
-    gemini_api_key = os.getenv("GEMINI_API_KEY")
-    if not gemini_api_key:
-        print("GEMINI_API_KEY not found in environment variables.")
-        return
+    # Import the environment loader utility
+    from env_loader import load_env_from_base, get_env_var
+    
+    # Load environment variables from .env file
+    load_env_from_base()
+    
+    gemini_api_key = get_env_var("GEMINI_API_KEY", required=True)
 
     llm = ChatGoogle(
         model=args.model,

@@ -1,14 +1,18 @@
 # pip install google-genai mcp
 # requires Python 3.13+
-import os
 import asyncio
 from google import genai
 from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 
+# Import the environment loader utility
+from env_loader import load_env_from_base, get_env_var
+
+# Load environment variables from .env file
+load_env_from_base()
 
 # Get the Gemini API key from the environment variable
-api_key = os.environ.get("GEMINI_API_KEY")
+api_key = get_env_var("GEMINI_API_KEY", required=True)
 
 # Create Gemini instance LLM class
 client = genai.Client(api_key=api_key)
